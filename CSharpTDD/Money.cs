@@ -1,10 +1,10 @@
 ﻿namespace CSharpTDD
 {
-    internal class Money
+    internal class Money : IExpression
     {
-        protected internal int amount;
+        private int amount;
 
-        protected internal string currency;
+        private string currency;
 
         public Money(int amount, string currency)
         {
@@ -42,6 +42,11 @@
         public override string ToString()
         {
             return amount + " " + currency;
+        }
+
+        public IExpression Plus(Money addend)
+        {
+            return new Money(amount + addend.amount, currency);
         }
     }
 }
