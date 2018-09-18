@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CSharpTDD
+﻿namespace CSharpTDD
 {
-    internal abstract class Money
+    internal class Money
     {
         protected internal int amount;
 
@@ -16,7 +12,10 @@ namespace CSharpTDD
             this.currency = currency;
         }
 
-        public abstract Money Times(int multiplier);
+        public Money Times(int multiplier)
+        {
+            return new Money(amount * multiplier, currency);
+        }
 
         public string Currency()
         {
@@ -37,7 +36,12 @@ namespace CSharpTDD
         {
             Money money = (Money)obj;
             return amount == money.amount
-                && GetType().Equals(money.GetType());
+                && Currency().Equals(money.currency);
+        }
+
+        public override string ToString()
+        {
+            return amount + " " + currency;
         }
     }
 }
