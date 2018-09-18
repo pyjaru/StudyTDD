@@ -8,16 +8,29 @@ namespace CSharpTDD
     {
         protected internal int amount;
 
+        protected internal string currency;
+
+        public Money(int amount, string currency)
+        {
+            this.amount = amount;
+            this.currency = currency;
+        }
+
         public abstract Money Times(int multiplier);
+
+        public string Currency()
+        {
+            return currency;
+        }
 
         public static Money Dollar(int amount)
         {
-            return new Dollar(amount);
+            return new Dollar(amount, "USD");
         }
 
         public static Money Franc(int amount)
         {
-            return new Franc(amount);
+            return new Franc(amount, "CHF");
         }
 
         public override bool Equals(object obj)
