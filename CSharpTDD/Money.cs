@@ -12,7 +12,7 @@
             this.currency = currency;
         }
 
-        public Money Times(int multiplier)
+        public IExpression Times(int multiplier)
         {
             return new Money(amount * multiplier, currency);
         }
@@ -22,7 +22,7 @@
             return currency;
         }
 
-        public IExpression Plus(Money addend)
+        public IExpression Plus(IExpression addend)
         {
             return new Sum(this, addend);
         }
