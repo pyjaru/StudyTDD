@@ -2,9 +2,9 @@
 {
     internal class Money : IExpression
     {
-        private int amount;
+        protected internal int amount;
 
-        private string currency;
+        protected internal string currency;
 
         public Money(int amount, string currency)
         {
@@ -22,14 +22,14 @@
             return currency;
         }
 
-        public static Money Dollar(int amount)
+        public IExpression Plus(Money addend)
         {
-            return new Money(amount, "USD");
+            return new Sum(this, addend);
         }
 
-        public static Money Franc(int amount)
+        public Money Reduce(string to)
         {
-            return new Money(amount, "CHF");
+            return this;
         }
 
         public override bool Equals(object obj)
@@ -44,9 +44,14 @@
             return amount + " " + currency;
         }
 
-        public IExpression Plus(Money addend)
+        public static Money Dollar(int amount)
         {
-            return new Money(amount + addend.amount, currency);
+            return new Money(amount, "USD");
+        }
+
+        public static Money Franc(int amount)
+        {
+            return new Money(amount, "CHF");
         }
     }
 }

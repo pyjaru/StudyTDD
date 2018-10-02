@@ -1,4 +1,4 @@
-using Xunit;
+﻿using Xunit;
 
 namespace CSharpTDD
 {
@@ -43,6 +43,33 @@ namespace CSharpTDD
             Bank bank = new Bank();
             Money reduced = bank.Reduce(sum, "USD");
             Assert.Equal(Money.Dollar(10), reduced);
+        }
+
+        [Fact]
+        public void TestPlusReturnsSum()
+        {
+            Money five = Money.Dollar(5);
+            IExpression result = five.Plus(five);
+            Sum sum = (Sum)result;
+            Assert.Equal(five, sum.augend);
+            Assert.Equal(five, sum.addend);
+        }
+
+        [Fact]
+        public void TestReduceSum()
+        {
+            IExpression sum = new Sum(Money.Dollar(3), Money.Dollar(4));
+            Bank bank = new Bank();
+            Money result = bank.Reduce(sum, "USD");
+            Assert.Equal(Money.Dollar(7), result);
+        }
+
+        [Fact]
+        public void TestReduceMoney()
+        {
+            Bank bank = new Bank();
+            Money result = bank.Reduce(Money.Dollar(1), "USD");
+            Assert.Equal(Money.Dollar(1), result);
         }
     }
 }
